@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "centercitypcs_utils"
+version = "0.1.0"
+description = ""
+authors = ["Scott Burns <sburns@centercitypcs.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.1.2"
+cx-oracle = "^8.0.1"
+sqlalchemy = "^1.3.19"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+ipython = "^7.18.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
