@@ -5,6 +5,7 @@ Utility Functions
 __version__ = "0.1.0"
 
 import sqlalchemy
+import records
 import pandas as pd
 import gspread
 import gspread_dataframe
@@ -19,6 +20,14 @@ def get_sql_as_df(database_url: str, query_file: str, **kwargs: dict) -> pd.Data
     ).connect() as db:
         df = pd.read_sql(query, db, **kwargs)
 
+    return df
+
+
+def ps_query_to_df(database_url: str, query_file: str, **params: dict) -> pd.DataFrame:
+    db = records.Database(database_url, max_identifier_length=128)
+    rows = db.query_file(query_file, **params)
+    df = rows.export("df")
+    db.close()
     return df
 
 
