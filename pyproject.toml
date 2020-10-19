@@ -11,6 +11,7 @@ cx-oracle = "^8.0.1"
 sqlalchemy = "^1.3.19"
 gspread = "^3.6.0"
 gspread_dataframe = "^3.1.0"
+records = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
