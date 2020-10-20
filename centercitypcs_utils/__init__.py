@@ -2,7 +2,7 @@
 Utility Functions
 """
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 import sqlalchemy
 import records
@@ -23,7 +23,9 @@ def get_sql_as_df(database_url: str, query_file: str, **kwargs: dict) -> pd.Data
     return df
 
 
-def ps_query_to_df(database_url: str, query_file: str, **params: dict) -> pd.DataFrame:
+def ps_query_to_df(
+    database_url: str, query_file: str, params: dict = {}
+) -> pd.DataFrame:
     db = records.Database(database_url, max_identifier_length=128)
     rows = db.query_file(query_file, **params)
     df = rows.export("df")
