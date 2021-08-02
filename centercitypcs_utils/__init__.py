@@ -2,7 +2,7 @@
 Utility Functions
 """
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 import sqlalchemy
 import records
@@ -34,14 +34,17 @@ def ps_query_to_df(
 
 
 def get_google_sheet_as_df(
-    spreadsheet_key: str, service_account: str, worksheet_number: str = 0, **kwargs,
+    spreadsheet_key: str,
+    service_account: str,
+    worksheet_number: str = 0,
+    **kwargs,
 ) -> pd.DataFrame:
     access = gspread.service_account(service_account)
     spreadsheet = access.open_by_key(spreadsheet_key)
     sheet = spreadsheet.get_worksheet(worksheet_number)
     df = gspread_dataframe.get_as_dataframe(sheet, evaluate_formulas=True, **kwargs)
 
-    df.dropna("rows", how="all", inplace=True)
-    df.dropna("columns", how="all", inplace=True)
+    df.dropna(axis="index", how="all", inplace=True)
+    df.dropna(axis="columns", how="all", inplace=True)
 
     return df
