@@ -5,7 +5,7 @@ description = ""
 authors = ["Scott Burns <sburns@centercitypcs.org>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 pandas = "^1.1.2"
 cx-oracle = "^8.0.1"
 sqlalchemy = "^1.3.19"
