@@ -11,8 +11,10 @@ import gspread
 import gspread_dataframe
 
 
-def get_sql_as_df(database_url: str, query_file: str, **kwargs: dict) -> pd.DataFrame:
-    with open(query_file, "r") as query_file:
+def get_sql_as_df(
+    database_url: str, query_file_name: str, **kwargs: dict
+) -> pd.DataFrame:
+    with open(query_file_name, "r") as query_file:
         query = query_file.read()
 
     with sqlalchemy.create_engine(
@@ -24,10 +26,10 @@ def get_sql_as_df(database_url: str, query_file: str, **kwargs: dict) -> pd.Data
 
 
 def ps_query_to_df(
-    database_url: str, query_file: str, params: dict = {}
+    database_url: str, query_file_name: str, params: dict = {}
 ) -> pd.DataFrame:
     db = records.Database(database_url, max_identifier_length=128)
-    rows = db.query_file(query_file, **params)
+    rows = db.query_file(query_file_name, **params)
     df = rows.export("df")
     db.close()
     return df
@@ -36,7 +38,7 @@ def ps_query_to_df(
 def get_google_sheet_as_df(
     spreadsheet_key: str,
     service_account: str,
-    worksheet_number: str = 0,
+    worksheet_number: str = "0",
     **kwargs,
 ) -> pd.DataFrame:
     access = gspread.service_account(service_account)
