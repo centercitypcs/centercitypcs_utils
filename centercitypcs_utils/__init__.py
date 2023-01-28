@@ -4,11 +4,13 @@ Utility Functions
 
 __version__ = "0.2.3"
 
-import sqlalchemy
-import records
-import pandas as pd
+from pathlib import Path
+
 import gspread
 import gspread_dataframe
+import pandas as pd
+import records
+import sqlalchemy
 
 
 def get_sql_as_df(
@@ -37,8 +39,8 @@ def ps_query_to_df(
 
 def get_google_sheet_as_df(
     spreadsheet_key: str,
-    service_account: str,
-    worksheet_number: str = "0",
+    service_account: Path,
+    worksheet_number: int = 0,
     **kwargs,
 ) -> pd.DataFrame:
     access = gspread.service_account(service_account)
