@@ -2,7 +2,7 @@
 Utility Functions
 """
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 from pathlib import Path
 
@@ -14,15 +14,18 @@ import sqlalchemy
 
 
 def get_sql_as_df(
-    database_url: str, query_file_name: str, **kwargs: dict
-) -> pd.DataFrame:
+    database_url: str | None, query_file_name: Path, params: dict
+) -> pd.DataFrame | None:
+    if not database_url:
+        return
+
     with open(query_file_name, "r") as query_file:
-        query = query_file.read()
+        query: sqlalchemy.TextClause = sqlalchemy.sql.text(query_file.read())
 
     with sqlalchemy.create_engine(
         database_url, max_identifier_length=128
     ).connect() as db:
-        df = pd.read_sql(query, db, **kwargs)
+        df = pd.read_sql_query(query, db, params=params)
 
     return df
 
