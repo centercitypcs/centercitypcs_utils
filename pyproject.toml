@@ -1,17 +1,17 @@
 [tool.poetry]
 name = "centercitypcs_utils"
-version = "0.2.4"
+version = "0.2.5"
 description = ""
 authors = ["Scott Burns <sburns@centercitypcs.org>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 pandas = "^1.1.2"
-cx-oracle = "^8.0.1"
 gspread_dataframe = "^3.1.0"
 records = "^0.5.3"
 gspread = "^5.7.2"
 sqlalchemy = "^2.0.0"
+oracledb = "^1.4.2"
 
 [tool.poetry.group.dev.dependencies]
 safety = "^2.3.5"
